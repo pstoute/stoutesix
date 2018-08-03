@@ -19,10 +19,10 @@
     <div class="panel panel-info panel-collapsable{if !$postingReply} panel-collapsed{/if} hidden-print">
         <div class="panel-heading" id="ticketReply">
             <div class="collapse-icon pull-right">
-                <i class="fas fa-{if !$postingReply}plus{else}minus{/if}"></i>
+                <i class="fas fa-{if !$postingreply}plus{else}minus{/if}"></i>
             </div>
             <h3 class="panel-title">
-                <i class="fas fa-pencil"></i> &nbsp; {$LANG.supportticketsreply}
+                <i class="fas fa-pencil-alt"></i> &nbsp; {$LANG.supportticketsreply}
             </h3>
         </div>
         <div class="panel-body{if !$postingReply} panel-body-collapsed{/if}">
@@ -150,7 +150,7 @@
                     <strong>{$LANG.supportticketsticketattachments} ({$reply.attachments|count})</strong>
                     <ul>
                         {foreach from=$reply.attachments key=num item=attachment}
-                            <li><i class="fas fa-file-o"></i> <a href="dl.php?type={if $reply.id}ar&id={$reply.id}{else}a&id={$id}{/if}&i={$num}">{$attachment}</a></li>
+                            <li><i class="far fa-file"></i> <a href="dl.php?type={if $reply.id}ar&id={$reply.id}{else}a&id={$id}{/if}&i={$num}">{$attachment}</a></li>
                         {/foreach}
                     </ul>
                 </div>

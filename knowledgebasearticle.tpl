@@ -11,8 +11,17 @@
     {$kbarticle.text}
 </div>
 
+{if $kbarticle.editLink}
+    <a href="{$kbarticle.editLink}" class="btn btn-default btn-sm pull-right">
+        <i class="fas fa-pencil-alt fa-fw"></i>
+        {$LANG.edit}
+    </a>
+{/if}
+
 <ul class="kb-article-details">
-    <li><i class="fas fa-tag"></i> Email, SSL</li>
+    {if $kbarticle.tags }
+        <li><i class="fas fa-tag"></i> {$kbarticle.tags}</li>
+    {/if}
     <li><i class="fas fa-star"></i> {$kbarticle.useful} {$LANG.knowledgebaseratingtext}</li>
 </ul>
 <div class="clearfix"></div>
@@ -24,8 +33,8 @@
         {if $kbarticle.voted}
             {$kbarticle.useful} {$LANG.knowledgebaseratingtext} ({$kbarticle.votes} {$LANG.knowledgebasevotes})
         {else}
-            <button type="submit" name="vote" value="yes" class="btn btn-lg btn-link"><i class="fas fa-thumbs-o-up"></i> {$LANG.knowledgebaseyes}</button>
-            <button type="submit" name="vote" value="no" class="btn btn-lg btn-link"><i class="fas fa-thumbs-o-down"></i> {$LANG.knowledgebaseno}</button>
+            <button type="submit" name="vote" value="yes" class="btn btn-lg btn-link"><i class="far fa-thumbs-up"></i> {$LANG.knowledgebaseyes}</button>
+            <button type="submit" name="vote" value="no" class="btn btn-lg btn-link"><i class="far fa-thumbs-down"></i> {$LANG.knowledgebaseno}</button>
         {/if}
     </form>
 </div>
@@ -39,6 +48,12 @@
                     <a href="{routePath('knowledgebase-article-view', {$kbarticle.id}, {$kbarticle.urlfriendlytitle})}">
                         <i class="glyphicon glyphicon-file"></i> {$kbarticle.title}
                     </a>
+                    {if $kbarticle.editLink}
+                        <a href="{$kbarticle.editLink}" class="admin-inline-edit">
+                            <i class="fas fa-pencil-alt fa-fw"></i>
+                            {$LANG.edit}
+                        </a>
+                    {/if}
                     <p>{$kbarticle.article|truncate:100:"..."}</p>
                 </div>
             {/foreach}

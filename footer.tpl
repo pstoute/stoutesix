@@ -1,11 +1,10 @@
 
                 </div><!-- /.main-content -->
                 {if !$inShoppingCart && $secondarySidebar->hasChildren()}
-                    <div class="col-md-3 pull-md-left sidebar">
+                    <div class="col-md-3 pull-md-left sidebar sidebar-secondary">
                         {include file="$template/includes/sidebar.tpl" sidebar=$secondarySidebar}
                     </div>
                 {/if}
-            </div>
             <div class="clearfix"></div>
         </div>
     </div>
@@ -22,8 +21,8 @@
 			</div>
 			<div class="col-md-7 col-sm-12">
 				<form action="https://stoutewebsolutions.us7.list-manage.com/subscribe/post?u=ae170a14027febe3157f94d7d&amp;id=cac8b3b121" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" target="_blank" novalidate>
-					<input type="hidden" value="{$date_month}" name="DADDED[month]" id="mce-DADDED-month"> 
-					<input type="hidden" value="{$date_day}" name="DADDED[day]" id="mce-DADDED-day"> 
+					<input type="hidden" value="{$date_month}" name="DADDED[month]" id="mce-DADDED-month">
+					<input type="hidden" value="{$date_day}" name="DADDED[day]" id="mce-DADDED-day">
 					<input type="hidden" value="{$date_year}" name="DADDED[year]" id="mce-DADDED-year">
 					<div class="row" style="padding-bottom:20px;">
 						<div class="col-sm-8" style="padding: 0 5px;">
@@ -45,7 +44,7 @@
 	</div>
 </section>
 
-<section id="footer" style="background:#333333;color:#ffffff;">
+<section id="footer">
     <div class="container">
         <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
         <p>Copyright &copy; {$date_year} {$companyname}. All Rights Reserved.</p>
@@ -67,7 +66,7 @@
             </div>
             <div class="modal-footer panel-footer">
                 <div class="pull-left loader">
-                    <i class="fas fa-circle-o-notch fa-spin"></i> Loading...
+                    <i class="fas fa-circle-notch fa-spin"></i> Loading...
                 </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     Close

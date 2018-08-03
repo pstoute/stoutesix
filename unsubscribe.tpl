@@ -18,7 +18,7 @@
 
 <p class="text-center">
     <a href="index.php" class="btn btn-default btn-lg">
-        <i class="fas fa-home"></i>
+        <i class="fa fa-home"></i>
         {$LANG.returnhome}
     </a>
 </p>

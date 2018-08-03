@@ -24,7 +24,7 @@
 
         <div class="col-sm-4">
             <div class="affiliate-stat affiliate-stat-green alert-success">
-                <i class="fas fa-bar-chart-o"></i>
+                <i class="far fa-chart-bar"></i>
                 <span>{$conversionrate}%</span>
                 {$LANG.affiliatesconversionrate}
             </div>
@@ -65,7 +65,7 @@
     {else}
         <p class="text-center">
             <a href="{$smarty.server.PHP_SELF}?action=withdrawrequest" class="btn btn-lg btn-danger"{if !$withdrawlevel} disabled="true"{/if}>
-                <i class="fas fa-bank"></i> {$LANG.affiliatesrequestwithdrawal}
+                <i class="fas fa-university"></i> {$LANG.affiliatesrequestwithdrawal}
             </a>
         </p>
         {if !$withdrawlevel}

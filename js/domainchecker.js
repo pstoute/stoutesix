@@ -43,7 +43,7 @@ jQuery('#frmDomainChecker').submit(function (e) {
         captchaResponse = "&code=" + captchaValue.val();
     }
 
-    jQuery("#btnCheckAvailability").html('<i class="fas fa-spinner fa-spin"></i>');
+    jQuery("#btnCheckAvailability").html('<i class="fa fa-spinner fa-spin"></i>');
 
     // perform spin
     jQuery.post(

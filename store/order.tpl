@@ -18,10 +18,14 @@
                         <select name="billingcycle" class="form-control">
                             {foreach $product->pricing()->allAvailableCycles() as $pricing}
                                 <option value="{$pricing->cycle()}"{if $requestedCycle == $pricing->cycle()} selected{/if}>
-                                    {if $pricing->isYearly()}
-                                        {$pricing->cycleInYears()} - {$pricing->yearlyPrice()}
+                                    {if $pricing->isRecurring()}
+                                        {if $pricing->isYearly()}
+                                            {$pricing->cycleInYears()} - {$pricing->yearlyPrice()}
+                                        {else}
+                                            {$pricing->cycleInMonths()} - {$pricing->monthlyPrice()}
+                                        {/if}
                                     {else}
-                                        {$pricing->cycleInMonths()} - {$pricing->monthlyPrice()}
+                                        {$pricing->toFullString()}
                                     {/if}
                                 </option>
                             {/foreach}
@@ -42,7 +46,7 @@
                 {if $allowSubdomains}
                     <li role="presentation"><a href="#sub-domain" aria-controls="sub-domain" role="tab" data-toggle="tab">Subdomain of an Existing Domain</a></li>
                 {/if}
-                <li role="presentation"><a href="#custom-domain" aria-controls="custom-domain" role="tab" data-toggle="tab">A domain I already own</a></li>
+                <li role="presentation"><a id="tabCustomDomainControl" href="#custom-domain" aria-controls="custom-domain" role="tab" data-toggle="tab">A domain I already own</a></li>
             </ul>
             <div class="tab-content store-domain-tab-content">
                 <div role="tabpanel" class="tab-pane active" id="existing-domain">
@@ -92,7 +96,7 @@
                 <div role="tabpanel" class="tab-pane" id="custom-domain">
                     <div class="row">
                         <div class="col-sm-8">
-                            <input type="text" class="form-control domain-input" placeholder="yourdomain.com" name="custom_domain">
+                            <input type="text" class="form-control domain-input" placeholder="yourdomain.com" name="custom_domain" value="{$customDomain}">
                         </div>
                         <div class="col-sm-4">
                             <span class="domain-validation domain-input-validation"></span>
@@ -124,7 +128,7 @@
     </div>
 
     {if $upsellProduct && $promotion}
-        <div class="store-promoted-product">
+        <div class="store-promoted-product upsell-{$upsellProduct->productKey}">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="icon">
@@ -138,17 +142,10 @@
                     {if $promotion->getDescription()}
                         <p>{$promotion->getDescription()}</p>
                     {/if}
-                    {if $promotion->hasHighlights()}
-                        <ul>
-                            {foreach $promotion->getHighlights() as $highlight}
-                                <li>{$highlight}</li>
-                            {/foreach}
-                        </ul>
-                    {/if}
                     {if $promotion->hasFeatures()}
                         <ul class="features">
                             {foreach $promotion->getFeatures() as $highlight}
-                                <li><i class="fas fa-check-circle-o"></i> {$highlight}</li>
+                                <li><i class="far fa-check-circle"></i> {$highlight}</li>
                             {/foreach}
                         </ul>
                     {/if}
@@ -191,7 +188,7 @@ jQuery(document).ready(function(){
 
           var domainName = jQuery('.subdomain-input').val() + '.' + jQuery('#existing_sld_for_subdomain').val();
 
-          $.post('{routePath('store-order-validate')}', 'domain=' + domainName, function(data) {
+          WHMCS.http.jqClient.post('{routePath('store-order-validate')}', 'domain=' + domainName, function(data) {
               if (data.valid) {
                   jQuery('.subdomain-validation').html('<i class="fas fa-check"></i> Valid').addClass('ok');
                   jQuery('#frmAddToCart button[type="submit"]').removeProp('disabled');
@@ -215,7 +212,7 @@ jQuery(document).ready(function(){
         delay2(function(){
           jQuery('.domain-input-validation').html('<i class="fas fa-spinner fa-spin"></i> Validating...').removeClass('ok');
           jQuery('#frmAddToCart button[type="submit"]').prop('disabled', true);
-          $.post('{routePath('store-order-validate')}', 'domain=' + jQuery('.domain-input').val(), function(data) {
+          WHMCS.http.jqClient.post('{routePath('store-order-validate')}', 'domain=' + jQuery('.domain-input').val(), function(data) {
             if (data.valid) {
                 jQuery('.domain-input-validation').html('<i class="fas fa-check"></i> Valid').addClass('ok');
                 jQuery('#frmAddToCart button[type="submit"]').removeProp('disabled');
@@ -258,6 +255,11 @@ jQuery(document).ready(function(){
         updateUpsellDetailsOnBillingCycleChange(cycle);
     });
     updateUpsellDetailsOnBillingCycleChange(jQuery('.payment-term').find('option:selected').val());
+
+    {if $customDomain}
+        jQuery('#tabCustomDomainControl').click();
+        jQuery('.store-order-container .domain-input').trigger('keyup');
+    {/if}
 });
 
 function updateUpsellDetailsOnBillingCycleChange(cycle) {

@@ -18,7 +18,7 @@
         {foreach $dlcats as $dlcat}
             <div class="col-sm-6">
                 <a href="{routePath('download-by-cat', $dlcat.id, $dlcat.urlfriendlyname)}">
-                    <i class="fas fa-folder-open-o"></i>
+                    <i class="far fa-folder-open"></i>
                     <strong>{$dlcat.name}</strong>
                 </a>
                 ({$dlcat.numarticles})

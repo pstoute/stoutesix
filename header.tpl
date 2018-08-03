@@ -11,7 +11,7 @@
     {$headoutput}
 
 </head>
-<body>
+<body data-phone-cc-input="{$phoneNumberInputStyle}">
 
 {$headeroutput}
 
@@ -40,7 +40,7 @@
                     <a href="#" data-toggle="popover" id="accountNotifications" data-placement="bottom">
                         {$LANG.notifications}
                         {if count($clientAlerts) > 0}
-                          <span class="label label-info">NEW</span>
+                            <span class="label label-info">{lang key='notificationsnew'}</span>
                         {/if}
                         <b class="caret"></b>
                     </a>
@@ -49,7 +49,7 @@
                         {foreach $clientAlerts as $alert}
                             <li>
                                 <a href="{$alert->getLink()}">
-                                    <i class="fas fa-fw fa-{if $alert->getSeverity() == 'danger'}exclamation-circle{elseif $alert->getSeverity() == 'warning'}warning{elseif $alert->getSeverity() == 'info'}info-circle{else}check-circle{/if}"></i>
+                                    <i class="fas fa-fw fa-{if $alert->getSeverity() == 'danger'}exclamation-circle{elseif $alert->getSeverity() == 'warning'}exclamation-triangle{elseif $alert->getSeverity() == 'info'}info-circle{else}check-circle{/if}"></i>
                                     <div class="message">{$alert->getMessage()}</div>
                                 </a>
                             </li>
@@ -62,7 +62,7 @@
                     </div>
                 </li>
                 <li class="primary-action">
-                    <a href="{$WEB_ROOT}/logout.php" class="btn btn-action">
+                    <a href="{$WEB_ROOT}/logout.php" class="btn">
                         {$LANG.clientareanavlogout}
                     </a>
                 </li>
@@ -76,7 +76,7 @@
                     </li>
                 {/if}
                 <li class="primary-action">
-                    <a href="{$WEB_ROOT}/cart.php?a=view" class="btn btn-action">
+                    <a href="{$WEB_ROOT}/cart.php?a=view" class="btn">
                         {$LANG.viewcart}
                     </a>
                 </li>
@@ -84,7 +84,7 @@
             {if $adminMasqueradingAsClient || $adminLoggedIn}
                 <li>
                     <a href="{$WEB_ROOT}/logout.php?returntoadmin=1" class="btn btn-logged-in-admin" data-toggle="tooltip" data-placement="bottom" title="{if $adminMasqueradingAsClient}{$LANG.adminmasqueradingasclient} {$LANG.logoutandreturntoadminarea}{else}{$LANG.adminloggedin} {$LANG.returntoadminarea}{/if}">
-                        <i class="fas fa-sign-out"></i>
+                        <i class="fas fa-sign-out-alt"></i>
                     </a>
                 </li>
             {/if}
@@ -185,7 +185,7 @@
                         {/if}
                         <li>
                             <a id="btnOrderHosting" href="cart.php">
-                                <i class="fas fa-hdd-o"></i>
+                                <i class="far fa-hdd"></i>
                                 <p>
                                     {$LANG.orderhosting} <span>&raquo;</span>
                                 </p>
@@ -201,7 +201,7 @@
                         </li>
                         <li>
                             <a id="btnGetSupport" href="submitticket.php">
-                                <i class="fas fa-envelope-o"></i>
+                                <i class="far fa-envelope"></i>
                                 <p>
                                     {$LANG.getsupport} <span>&raquo;</span>
                                 </p>

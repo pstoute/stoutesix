@@ -29,7 +29,7 @@
         {else}
             <div class="col-sm-3 col-xs-6 tile" onclick="window.location='clientarea.php?action=quotes'">
                 <a href="clientarea.php?action=quotes">
-                    <div class="icon"><i class="fas fa-file-text-o"></i></div>
+                    <div class="icon"><i class="far fa-file-alt"></i></div>
                     <div class="stat">{$clientsstats.numquotes}</div>
                     <div class="title">{$LANG.quotes}</div>
                     <div class="highlight bg-color-green"></div>
@@ -81,7 +81,7 @@
                             {if $item->getExtra('btn-link') && $item->getExtra('btn-text')}
                                 <div class="pull-right">
                                     <a href="{$item->getExtra('btn-link')}" class="btn btn-default bg-color-{$item->getExtra('color')} btn-xs">
-                                        {if $item->getExtra('btn-icon')}<i class="fas {$item->getExtra('btn-icon')}"></i>{/if}
+                                        {if $item->getExtra('btn-icon')}<i class="fas {$item->getextra('btn-icon')}"></i>{/if}
                                         {$item->getExtra('btn-text')}
                                     </a>
                                 </div>
