@@ -1,0 +1,7 @@
+# WHMCS Six Theme Configuration File
+
+name: "SWS-Six Theme"
+description: "Based on the Default Theme for WHMCS Version 6.0"
+author: "Paul Stoute"
+properties:
+  serverSidePagination: false # Defines client side will handle pagination
